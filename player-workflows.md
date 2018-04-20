@@ -78,7 +78,7 @@ modal.on('hide', function() {
 ---
 ## 改变播放器的音量
 
-播放器的音量可以通过播放器上的`volume`功能进行更改。`volume`功能接受0-1的数字。不带参数调用它将返回当前音量。
+播放器的音量可以通过播放器上的`volume`函数进行更改。`volume`函数接受0-1的数字。不带参数调用它将返回当前音量。
 
 例如：
 
@@ -94,7 +94,7 @@ myPlayer.ready(function() {
 });
 ```
 
-音量也可以使用`muted`功能静音（实际上并未改变音量值）。在没有参数的情况下调用它将返回播放器上静音的当前状态。
+音量也可以使用`muted`函数静音（实际上并未改变音量值）。在没有参数的情况下调用它将返回播放器上静音的当前状态。
 
 ```js
 var myPlayer = videojs('some-player-id');
@@ -113,7 +113,7 @@ myPlayer.ready(function() {
 ---
 ## 让播放器全屏
 
-要检查播放器当前是否全屏，请像这样调用播放器上的`isFullscreen`功能。
+要检查播放器当前是否全屏，请像这样调用播放器上的`isFullscreen`函数。
 
 ```js
 var myPlayer = videojs('some-player-id');
@@ -155,7 +155,7 @@ myPlayer.ready(function() {
 ```
 
 ---
-## 使用播放信息功能
+## 使用播放信息函数
 
 `play`可以使一个具有信号源的播放器开始播放。
 

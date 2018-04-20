@@ -221,6 +221,111 @@ videojs('my-player', {
 
 > 类型：`string`
 
-Allows overriding the default URL to vtt.js, which may be loaded asynchronously to polyfill support for WebVTT.
+允许将默认URL重写为vtt.js，它可以异步加载到`WebVTT`的 polyfill support。
 
-This option will be used in the "novtt" build of Video.js (i.e. video.novtt.js). Otherwise, vtt.js is bundled with Video.js.
+该选项将用于 Video.js 的“novtt”版本（即`video.novtt.js`）。 其他版本中，vtt.js 与 Video.js 捆绑在一起。
+
+---
+## 组件选项
+
+Video.js 播放器是一个组件。像所有组件一样，你可以定义它包含的子项，它们显示的顺序以及传递给它们的选项。
+
+这是一个快速参考; 因此，有关 Video.js 中组件的更多详细信息，请查看[组件指南]()。
+
+### `children`
+
+> 类型：`Array|Object`
+
+如果是一个`Array`——这是该选项的默认值——这是用来确定哪些子组件（通过组件名称）以及它们在播放器（或其他组件）上创建的顺序：
+
+```js
+// 以下代码创建一个只有bigPlayButton和controlBar子组件的播放器。
+videojs('my-player', {
+  children: [
+    'bigPlayButton',
+    'controlBar'
+  ]
+});
+```
+
+`children`选项也可以作为一个`Object`传递。在这种情况下，它被用来为任何/所有子项提供`options`，包括使用`false`来禁用它们：
+
+```js
+// 该播放器的唯一孩子将是controlBar。显然，这不是禁用孙子的理想方法！
+videojs('my-player', {
+  children: {
+    controlBar: {
+      fullscreenToggle: false
+    }
+  }
+});
+```
+
+### `${componentName}`
+
+> 类型：`Object`
+
+可以通过组件名称的骆驼命名方式（例如用`ControlBar`表示`ControlBar`）为组件提供自定义选项。这些可以嵌套在子代关系的表示中。例如，要禁用全屏控制：
+
+```js
+videojs('my-player', {
+  controlBar: {
+    fullscreenToggle: false
+  }
+});
+```
+
+---
+## 技术选项
+
+### `${techName}`
+
+> 类型：`Object`
+
+Video.js 播放技术（即“techs”）可以作为`videojs`函数的选项的一部分自定义选项传递过去。它们应该使用技术名称的小写形式（例如`"flash"`或`"html5"`）传递。
+
+### `flash`
+
+#### `swf`
+
+指定`Flash`技术的 Video.js SWF文件所在的位置：
+
+```js
+videojs('my-player', {
+  flash: {
+    swf: '//path/to/videojs.swf'
+  }
+});
+```
+
+然而，更改全局默认值通常更合适一些：
+
+```js
+videojs.options.flash.swf = '//path/to/videojs.swf'
+```
+
+### `html5`
+
+#### `nativeControlsForTouch`
+
+> 类型：`boolean`
+
+只有`Html5`技术支持，此选项可以设置为`true`以强制使用触摸设备的原生控件。
+
+#### `nativeAudioTracks`
+
+> 类型：boolean
+
+可以设置为`false`以禁用本地音频轨道支持。最常用于[`videojs-contrib-hls`](https://github.com/videojs/videojs-contrib-hls)。
+
+#### `nativeTextTracks`
+
+> 类型：`boolean`
+
+可以设置为`false`来强制使用仿原生文本轨迹而不是原生支持。 `nativeCaptions`选项也存在，但只是`nativeTextTracks`的别名。
+
+#### `nativeVideoTracks`
+
+> 类型：`boolean`
+
+可以设置为`false`以禁用原生视频轨道支持。最常用于[`videojs-contrib-hls`](https://github.com/videojs/videojs-contrib-hls)。
